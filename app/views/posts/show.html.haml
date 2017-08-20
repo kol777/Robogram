@@ -11,6 +11,9 @@
       .caption
         .user-name
           = @post.user.user_name
+        .time-ago
+          %span(class="glyphicon glyphicon-time")
+          = time_ago_in_words @post.created_at
         = @post.caption
       - if @post.comments
         - @post.comments.each do |comment|
@@ -20,10 +23,15 @@
             .comment-content
               = comment.content
             - if comment.user == current_user
-              = link_to post_comment_path(@post, comment), method: :delete, data: { confirm: "Are you sure?" }
-      .comment-form
-        = form_for [@post, @post.comments.new] do |f|
-          = f.text_field :content, placeholder: 'Add a comment'
+              = link_to post_comment_path(@post, comment), method: :delete, data: { confirm: "Are you sure?" }, remote: true do
+                %span(class="glyphicon glyphicon-remove delete-comment")
+      .comment-like-form.row
+        .like-button.col-sm-1
+          %span(class="glyphicon glyphicon-fire")
+        .comment-form.col-sm-11
+          = form_for([@post, @post.comments.build], remote: true) do |f|
+            = f.text_field :content, placeholder: 'Add a comment', class: "comment_content", id: "comment_content_#{@post.id}"
+
 - if @post.user.id == current_user.id
   .text-center.edit-links
     = link_to "Cancel", posts_path
