@@ -15,16 +15,18 @@
           .navbar-brand= link_to "Robogram", root_path
         .collapse.navbar-collapse#bs-navbar-collapse-1
           %ul.nav.navbar-nav.navbar-right
-          - if user_signed_in?
-            %li
-              = link_to "New Post", new_post_path
-            %li
-              = link_to "Logout", destroy_user_session_path, method: :delete
-          - else
-            %li
-              = link_to "Login", new_user_session_path
-            %li
-              = link_to "Register", new_user_registration_path
+            - if user_signed_in?
+              %li
+                = link_to "My Profile", profile_path(current_user.user_name)
+              %li
+                = link_to "New Post", new_post_path
+              %li
+                = link_to "Logout", destroy_user_session_path, method: :delete
+            - else
+              %li
+                = link_to "Login", new_user_session_path
+              %li
+                = link_to "Register", new_user_registration_path
 
 
       .container
