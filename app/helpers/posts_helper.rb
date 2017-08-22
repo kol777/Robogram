@@ -10,7 +10,7 @@ module PostsHelper
       votes.voters.each do |voter|
         # add the user_name as a link to the array
         user_names.push(link_to voter.user_name,
-                                #profile_path(voter.user_name),
+                                profile_path(voter.user_name),
                                 class: 'user-name')
       end
       # present the array as a nice sentence using the as_sentence method and also make it usable within our html.  Then call the like_plural method with the votes variable we set earlier as the argument.
