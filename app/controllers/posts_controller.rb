@@ -1,6 +1,11 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
-  before_action :owned_post, only: [:edit, :update, :destroy, :show, :like]
+  before_action :find_post, only: [:edit, :update, :destroy, :show]
+  # before_action :set_post, :like
+
+  def find_post
+    @post = Post.find(params[:id])
+  end
 
   def index
     @posts = Post.all
