@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
-  before_action :owned_post, only: [:edit, :update, :destroy]
+  before_action :owned_post, only: [:edit, :update, :destroy, :show, :like]
 
   def index
     @posts = Post.all
@@ -43,6 +43,16 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.destroy
     redirect_to posts_path
+  end
+
+  def like
+    @post = Post.find(params[:id])
+    if @post.liked_by current_user
+      respond_to do |format|
+        format.html { redirect_to :back }
+        format.js
+      end
+    end
   end
 
   private
