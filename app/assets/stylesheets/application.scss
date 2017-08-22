@@ -25,6 +25,7 @@ body {
   height: 100%;
   background-color: #fafafa;
   font-family: proxima-nova, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-weight: bold;
 }
 
 .alert {
@@ -35,18 +36,25 @@ body {
 
 .navbar {
   margin-bottom: 0px;
+  font-size: large;
+
 }
 
 .navbar-brand {
   a {
-    color: #125688;
+    color: #460443;
   }
+  font-size: x-large;
 }
 
 .navbar-default {
-  background-color: #fff;
+  background-image: image-url('blurbg.jpg');
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-size: 100% 100%;
   .navbar-nav li a {
-    color: #125688;
+    color: #460443;
   }
 }
 
