@@ -8,6 +8,10 @@ class PostsController < ApplicationController
   end
 
   def index
+    @posts = Post.of_followed_users(current_user.following).order('created_at DESC')
+  end
+
+  def browse
     @posts = Post.all
   end
 
