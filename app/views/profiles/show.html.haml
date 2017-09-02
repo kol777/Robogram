@@ -1,0 +1,69 @@
+.posts-wrapper
+  .row.profile-header
+    .col-md-6
+      .img-circle
+        = profile_avatar_select(@user)
+    .col-md-6
+      .user-name-and-follow
+        %h3.profile-user-name
+          = @user.user_name
+        %span
+          - if @user == current_user
+            = link_to 'Edit Profile', edit_profile_path(@user.user_name),
+                                      class: 'btn edit-button'
+          - else
+            - if is_following(current_user.id, @user.id)
+              = link_to 'Following', unfollow_user_path,
+                                     remote: true,
+                                     class: 'btn unfollow-button',
+                                     id: 'unfollow-button',
+                                     method: :post
+            - else
+              = link_to 'Follow', follow_user_path,
+                                  remote: true,
+                                  class: 'btn follow-button',
+                                  id: 'follow-button',
+                                  method: :post
+      %p.profile-bio
+        = @user.bio
+      .user-statistics
+        %p
+          = pluralize @user.posts.count, 'post'
+
+-@posts.each do |post|
+  .post
+    .post-head
+      .name
+        = post.user.user_name
+    .image.center-block
+      = link_to (image_tag post.image.url(:medium), class:'img-responsive'), post_path(post)
+    %p.caption
+      =post.caption
+    .post-bottom
+      .likes
+        = likers_of post
+      .caption
+        .user-name
+          = link_to post.user.user_name, profile_path(post.user.user_name)
+        .time-ago
+          %span(class="glyphicon glyphicon-time")
+          = time_ago_in_words post.created_at
+        = post.caption
+      - if post.comments
+        - post.comments.each do |comment|
+          .comment
+            .user-name
+              = comment.user.user_name
+            .comment-content
+              = comment.content
+            - if comment.user == current_user
+              = link_to post_comment_path(post, comment), method: :delete, data: { confirm: "Are you sure?" }, id: "delete-#{comment.id}" do
+                %span(class="glyphicon glyphicon-remove delete-comment")
+      .comment-like-form.row
+        .col-sm-1
+          =link_to '', like_post_path(post.id), remote: true,
+                                           id: "like_#{post.id}",
+                                           class: "glyphicon glyphicon-fire"
+        .comment-form.col-sm-11
+          = form_for([post, post.comments.build], remote: true) do |f|
+            = f.text_field :content, placeholder: 'Add a comment...', class: "comment_content", id: "comment_content_#{post.id}"

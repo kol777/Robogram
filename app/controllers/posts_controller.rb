@@ -1,8 +1,17 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
-  before_action :owned_post, only: [:edit, :update, :destroy]
+  before_action :find_post, only: [:edit, :update, :destroy, :show]
+  # before_action :set_post, :like
+
+  def find_post
+    @post = Post.find(params[:id])
+  end
 
   def index
+    @posts = Post.of_followed_users(current_user.following).order('created_at DESC')
+  end
+
+  def browse
     @posts = Post.all
   end
 
@@ -43,6 +52,16 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.destroy
     redirect_to posts_path
+  end
+
+  def like
+    @post = Post.find(params[:id])
+    if @post.liked_by current_user
+      respond_to do |format|
+        format.html { redirect_to :back }
+        format.js
+      end
+    end
   end
 
   private

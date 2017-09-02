@@ -13,32 +13,54 @@
  *= require_tree .
  *= require_self
  */
+
  @import "bootstrap-sprockets";
  @import "bootstrap";
 
- body {
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
   background-color: #fafafa;
   font-family: proxima-nova, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-weight: bold;
+}
+
+.alert {
+  margin-bottom: 0px;
 }
 
 /* ## NAVBAR CUSTOMISATIONS ## */
 
+.navbar {
+  margin-bottom: 0px;
+  font-size: large;
+
+}
+
 .navbar-brand {
   a {
-    color: #125688;
+    color: #460443;
   }
+  font-size: x-large;
 }
 
 .navbar-default {
-  background-color: #fff;
-  height: 54px;
+  background-image: image-url('blurbg.jpg');
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-size: 100% 100%;
   .navbar-nav li a {
-    color: #125688;
+    color: #460443;
   }
 }
 
 .navbar-container {
-  width: 70%;
+  max-width: 1280px;
+  //padding: 14px 14px 0;
   margin: 0 auto;
 }
 
@@ -76,15 +98,6 @@
     .time-ago {
       color: #A5A7AA;
       float: right;
-      padding-top: 24px;
-      margin-top: 13px;
-      margin-left: 24px;
-      margin-right: 24px;
-      min-height: 68px;
-      align-items: center;
-      border-top: 1px solid #EEEFEF;
-      flex-direction: row;
-      justify-content: center;
     }
   }
   .image {
@@ -102,7 +115,6 @@
   }
   .user-name {
     font-weight: 500;
-    margin-right: 0.3em;
     color: #125688;
     font-size: 15px;
   }
@@ -115,13 +127,12 @@
       font-weight: 500;
       margin-right: 0.3em;
     }
-    .delete-comment {
+    .delete-comment-icon {
       float: right;
       color: #515151;
     }
   }
   margin-bottom: 7px;
-  padding-top: 24px;
   padding-left: 24px;
   padding-right: 24px;
   padding-bottom: 10px;
@@ -149,18 +160,108 @@
   justify-content: center;
 }
 
-/* ## Wrapper and styling for the new and edit views ## */
-
-.form-wrapper {
-  width: 60%;
-  margin: 20px auto;
-  background-color: #fff;
-  padding: 40px;
-  border: 1px solid #eeefef;
-  border-radius: 3px;
-}
+/* ## Wrapper and styling for the new, edit & devise views ## */
 
 .edit-links {
   margin-top: 20px;
   margin-bottom: 40px;
+}
+
+.registration-bg {
+  padding-top: 4em;
+  height: 100%;
+  background-image: image-url('bg.jpg');
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-size: 100% 100%;
+}
+
+.login-bg {
+  padding-top: 5em;
+  height: 100%;
+  background-image: image-url('bg.jpg');
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-size: 100% 100%;
+}
+
+.log-in{
+  margin-left: auto;
+  margin-right: auto;
+  text-align:center;
+  border: none;
+}
+
+.panel {
+  border-radius: 10px;
+}
+
+.panel-heading{
+  h1 {
+    text-align: center;
+  }
+}
+
+.likes {
+  margin-top: 20px;
+  margin-bottom: 7px;
+}
+
+#user_avatar {
+  margin: 20px auto;
+}
+
+.profile-header {
+  padding: 20px 0;
+}
+
+.profile-image {
+  margin: 20px auto;
+  height: 152px;
+  width: 152px;
+}
+
+.user-name-and-follow {
+  display: inline;
+}
+
+.profile-user-name {
+  display: inline;
+}
+
+.edit-button {
+  border-color: #818488;
+  color: #818488;
+  margin-left: 20px;
+}
+
+.profile-bio {
+  margin-top: 20px;
+}
+
+
+.follow-button {
+  text-transform: uppercase;
+  border-color: #4090db;
+  color: #4090db;
+  margin-left: 20px;
+  &:visited, &:focus, &:hover {
+    border-color: #2D6396;
+    color: #2D6396;
+  }
+}
+
+.unfollow-button {
+  text-transform: uppercase;
+  border-color: #66bd2b;
+  background-color: #66bd2b;
+  color: white;
+  margin-left: 20px;
+  &:visited, &:focus, &:hover {
+    border-color: #47821F;
+    background-color: #47821F;
+    color: white;
+  }
 }
